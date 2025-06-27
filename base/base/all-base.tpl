@@ -8,7 +8,6 @@ bind-address: '*'
 mode: rule
 log-level: {{ default(global.clash.log_level, "info") }}
 external-controller: {{ default(global.clash.api_port, "0.0.0.0:19090")}}
-external-ui: /ui/xd/
 #external-ui-name: xd
 external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
 secret: ''
