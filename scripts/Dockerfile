@@ -3,6 +3,8 @@ FROM alpine:latest
 LABEL maintainer="firefly.lzh@gmail.com"
 # ADD https://github.com/LM-Firefly/subconverter/commits/main.atom cache_bust
 ARG THREADS="4"
+ARG REPO_URL
+ARG BRANCH_NAME
 # ARG SHA=""
 
 # build minimized
@@ -38,7 +40,7 @@ RUN set -xe && \
     cmake -DCMAKE_CXX_STANDARD=11 . && \
     make install -j $THREADS && \
     cd .. && \
-    git clone https://github.com/LM-Firefly/subconverter --depth=1 && \
+    git clone -b ${BRANCH_NAME} ${REPO_URL} --depth=1 && \
     cd subconverter && \
 #    [ -n "$SHA" ] && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$SHA"'/' src/version.h;\
     time=$(date +%y.%m%d.%H%M-) && sha=$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$time$sha"'/' src/version.h && \

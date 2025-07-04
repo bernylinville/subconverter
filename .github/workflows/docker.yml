@@ -95,6 +95,8 @@ jobs:
           #            ghcr.io/lm-firefly/subconverter:latest
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
+            REPO_URL=https://github.com/${{ github.repository }}
+            BRANCH_NAME=${{ github.ref_name }}
             SHA=${{ steps.set-ver.outputs.sha_short }}
             VERSION=${{ steps.set-ver.outputs.set-ver }}
       #          outputs: type=image,"name=${{ env.DOCKERHUB_REPO }},${{ env.GHCR_REPO }}",push-by-digest=true,name-canonical=true,push=true
